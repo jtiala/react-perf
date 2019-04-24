@@ -5,10 +5,10 @@ const usePrettier = (code, language) => {
   const [prettierCode, setPrettierCode] = useState('');
 
   Promise.all([
-    import('prettier/standalone' /* webpackChunkName: "prettier" */),
-    import('prettier/parser-graphql' /* webpackChunkName: "prettier-graphql" */),
-    import('prettier/parser-babylon' /* webpackChunkName: "prettier-babylon" */),
-    import('prettier/parser-markdown' /* webpackChunkName: "prettier-markdown" */)
+    import('prettier/standalone' /* webpackChunkName: "Prettier" */),
+    import('prettier/parser-graphql' /* webpackChunkName: "Prettier-graphql" */),
+    import('prettier/parser-babylon' /* webpackChunkName: "Prettier-babylon" */),
+    import('prettier/parser-markdown' /* webpackChunkName: "Prettier-markdown" */)
   ]).then(([prettier, ...plugins]) => {
     try {
       setPrettierCode(
