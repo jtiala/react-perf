@@ -8,6 +8,7 @@ import { LANGUAGES, TYPES } from '../../constants';
 import Layout from '../layout/layout';
 import Select from '../select/select';
 import Loading from '../loading/loading';
+import usePrettier from '../../context/usePrettier';
 import './add.scss';
 
 const CodeMirror = lazy(() =>
@@ -21,6 +22,7 @@ const Add = () => {
   const [code, setCode] = useState('');
   const { user } = useUser();
   const { createShamecap } = useShamecaps();
+  const prettierCode = usePrettier(code, language.toLowerCase());
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -30,7 +32,7 @@ const Add = () => {
       title,
       language: slugify(language, { lower: true }),
       type: slugify(type, { lower: true }),
-      code: code.trim(),
+      code: prettierCode,
       created: Date.now(),
       user: { name: user.name }
     };

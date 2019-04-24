@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from '@reach/router';
-import moment from 'moment';
+import { formatDistance } from 'date-fns';
 import Code from './code';
 import Controls from './controls';
-import usePrettier from '../../context/usePrettier';
 
 export default ({
   id,
@@ -16,14 +15,12 @@ export default ({
   showControls,
   deleteShamecap
 }) => {
-  const prettierCode = usePrettier(code, language);
-
   return (
     <section className="shame-wrapper">
       <div className="shame">
         <div className="terminal">
           <Controls />
-          <Code language={language} code={prettierCode} />
+          <Code language={language} code={code} />
         </div>
       </div>
       <h3 className="title">{title}</h3>
@@ -33,7 +30,7 @@ export default ({
           <Link to={`/${user.name}`} state={{ username: user.displayName }}>
             @{user.name}
           </Link>{' '}
-          {moment(created).fromNow()}
+          {formatDistance(created, new Date(), { addSuffix: true })}
         </span>
       )}
       {showControls && (
